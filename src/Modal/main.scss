@@ -1,0 +1,30 @@
+.modal {
+  position: absolute;
+  height: 400px;
+  width: 200px;
+  background: #ffffff;
+  border: 1px solid #43425d;
+  top: 50px;
+  border-radius: 10px;
+
+  z-index: 100;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 26px;
+}
+
+.buttons button {
+  border: none;
+  background: transparent;
+
+  color: #6a6996;
+  font-size: 12px;
+}
+
+.buttons .red {
+  color: #ff5f5f;
+}
