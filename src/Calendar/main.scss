@@ -1,0 +1,105 @@
+// you must include each plugins' css
+// paths prefixed with ~ signify node_modules
+@import "~@fullcalendar/core/main.css";
+@import "~@fullcalendar/daygrid/main.css";
+@import "~@fullcalendar/timegrid/main.css";
+
+.page-wrap {
+  font-family: sans-serif;
+  font-size: 14px;
+
+  background-color: #f0f0f7;
+  color: #43425d;
+
+  padding-top: 30px;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.page-title {
+  margin: 0;
+  padding: 0;
+
+  font-size: 28px;
+  font-weight: normal;
+}
+.calendar {
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px #0000000a;
+
+  padding: 20px;
+  margin-top: 32px;
+}
+
+.calendar h2 {
+  font-size: 18px;
+  font-weight: normal;
+}
+.calendar-calendar {
+  margin: 0 auto;
+}
+
+.fc-day-header.fc-widget-header {
+  padding: 16px 30px;
+  color: #a3a6b4;
+  background: #f5f6fa;
+  border: none;
+}
+
+.fc-row.fc-widget-header {
+  border: 1px solid #eaf0f4;
+}
+.fc-unthemed thead {
+  border: 1px solid #eaf0f4;
+}
+
+.fc-button-primary {
+  font-size: 13px;
+  color: #4d4f5c;
+  background-color: #ffffff;
+  border-color: #d7dae2;
+}
+
+.fc-button-primary:not(:disabled):active,
+.fc-button-primary:not(:disabled).fc-button-active,
+.fc-button-primary:disabled {
+  color: #3b86ff;
+  background-color: #ffffff;
+  border-color: #d7dae2;
+  &:hover {
+    background-color: #ffffff;
+    border-color: #d7dae2;
+  }
+}
+
+.fc-toolbar h2 {
+  color: #4d4f5c;
+}
+
+.fc-button-group button {
+  padding: 8px 17px;
+}
+
+.fc-toolbar .fc-header-toolbar {
+  position: relative;
+}
+
+.fc-center {
+  margin-left: 80px;
+}
+
+.fc-right,
+.fc-left {
+  box-shadow: 0 2px 3px #0000000d;
+}
+.fc-right {
+  position: relative;
+  top: -40px;
+}
+
+.fc-content-skeleton thead {
+  border: none;
+}
