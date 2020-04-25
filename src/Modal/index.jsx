@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { addEvent, updateEvent } from "../Calendar/actions";
+import { addEvent, updateEvent, deleteEvent } from "../Calendar/actions";
 
 import "./main.scss";
 
-export const Modal = ({ positions: { x, y }, created, id, close }) => {
+export const Modal = ({
+  positions: { x, y },
+  created,
+  setEvent,
+  selectedEvent,
+  close,
+}) => {
   const dispatch = useDispatch();
   const [state, setState] = useState({
     title: "",
@@ -19,7 +25,14 @@ export const Modal = ({ positions: { x, y }, created, id, close }) => {
   };
 
   const handleSubmit = () => {
-    dispatch(!created ? addEvent(state) : updateEvent(id, state));
+    dispatch(!created ? addEvent(state) : updateEvent(selectedEvent.id, state));
+    setEvent(null);
+    close();
+  };
+
+  const handleDiscard = () => {
+    dispatch(deleteEvent(selectedEvent.id));
+    setEvent(null);
     close();
   };
 
@@ -50,7 +63,7 @@ export const Modal = ({ positions: { x, y }, created, id, close }) => {
         onChange={handleInput}
       />
       <div className="buttons">
-        <button className="red" onClick={close}>
+        <button className="red" onClick={created ? handleDiscard : close}>
           {created ? "Discard" : "Cancel"}
         </button>
         <button onClick={handleSubmit}>{created ? "Edit" : "Save"}</button>

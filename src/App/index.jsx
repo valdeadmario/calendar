@@ -11,17 +11,25 @@ const store = createStore(rootReducer);
 
 export const App = () => {
   const [positions, setPositions] = useState({ x: 0, y: 0 });
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState("");
+  const [selectedEvent, setEvent] = useState(null);
   return (
     <Provider store={store}>
       {showModal && (
-        <Modal close={() => setShowModal(false)} positions={positions} />
+        <Modal
+          close={() => setShowModal("")}
+          positions={positions}
+          created={showModal === "created"}
+          selectedEvent={selectedEvent}
+          setEvent={setEvent}
+        />
       )}
       <Calendar
         setPositions={(arg) => {
           setPositions(arg);
-          setShowModal(true);
         }}
+        setOpenModal={setShowModal}
+        setEvent={setEvent}
       />
     </Provider>
   );

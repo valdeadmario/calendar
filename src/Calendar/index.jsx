@@ -7,11 +7,9 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-import { Modal } from "../Modal";
-
 import "./main.scss";
 
-export const Calendar = ({ setPositions }) => {
+export const Calendar = ({ setPositions, setOpenModal, setEvent }) => {
   const dispatch = useDispatch();
   const calendarComponentRef = useRef();
   const [calendarWeekends, setCalendarWeekends] = useState(true);
@@ -23,6 +21,16 @@ export const Calendar = ({ setPositions }) => {
 
   const handleDateClick = (arg) => {
     setPositions({ x: arg.jsEvent.clientX, y: arg.jsEvent.clientY });
+    setOpenModal("save");
+  };
+
+  const handleEventClick = (arg) => {
+    const currentEvent = calendarEvents.find(
+      (item) => item.id === +arg.event.id
+    );
+    setPositions({ x: arg.jsEvent.clientX, y: arg.jsEvent.clientY });
+    setEvent(currentEvent);
+    setOpenModal("created");
   };
 
   return (
@@ -66,6 +74,7 @@ export const Calendar = ({ setPositions }) => {
               weekends={calendarWeekends}
               events={calendarEvents}
               dateClick={handleDateClick}
+              eventClick={handleEventClick}
               eventContent={(arg) => (
                 <div>
                   <b>111</b>&nbsp;
