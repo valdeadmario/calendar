@@ -10,7 +10,7 @@ import rootReducer from "../reducers";
 const store = createStore(rootReducer);
 
 export const App = () => {
-  const [positions, setPositions] = useState({ x: 0, y: 0 });
+  const [positions, setPositions] = useState({ x: 0, y: 0, date: new Date() });
   const [showModal, setShowModal] = useState("");
   const [selectedEvent, setEvent] = useState(null);
   return (

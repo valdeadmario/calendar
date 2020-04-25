@@ -14,13 +14,17 @@ export const Calendar = ({ setPositions, setOpenModal, setEvent }) => {
   const calendarComponentRef = useRef();
   const [calendarWeekends, setCalendarWeekends] = useState(true);
   const calendarEvents = useSelector((state) => state.events);
-
+  console.log(calendarEvents);
   const moveEvent = ({ event }) => {
     dispatch(updateEvent(event.id, { start: event.start }));
   };
 
   const handleDateClick = (arg) => {
-    setPositions({ x: arg.jsEvent.clientX, y: arg.jsEvent.clientY });
+    setPositions({
+      x: arg.jsEvent.clientX,
+      y: arg.jsEvent.clientY,
+      date: arg.date,
+    });
     setOpenModal("save");
   };
 
@@ -75,6 +79,7 @@ export const Calendar = ({ setPositions, setOpenModal, setEvent }) => {
               events={calendarEvents}
               dateClick={handleDateClick}
               eventClick={handleEventClick}
+              eventColor
               eventContent={(arg) => (
                 <div>
                   <b>111</b>&nbsp;

@@ -8,7 +8,7 @@ const initialState = [
     title: "Lets begin",
     start: new Date(),
     notes: "",
-    eventColor: "#378006",
+    color: "#9c27b0", // override!
   },
   { id: 1, title: "Lets begin", start: new Date(), notes: "" },
   { id: 2, title: "Lets begin", start: new Date(), notes: "" },
@@ -20,7 +20,6 @@ const initialState = [
     title: "Lets begin",
     start: new Date(),
     notes: "",
-    eventColor: "#378006",
   },
 ];
 

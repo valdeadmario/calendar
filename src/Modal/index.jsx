@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { CirclePicker } from "react-color";
+import DatePicker from "react-datepicker";
 
 import { addEvent, updateEvent, deleteEvent } from "../Calendar/actions";
 
+import "react-datepicker/dist/react-datepicker.css";
 import "./main.scss";
 
 export const Modal = ({
-  positions: { x, y },
+  positions: { x, y, date },
   created,
   setEvent,
   selectedEvent,
@@ -14,10 +17,9 @@ export const Modal = ({
 }) => {
   const dispatch = useDispatch();
   const [state, setState] = useState({
-    title: "",
-    date: "",
-    time: "",
-    notes: "",
+    title: (selectedEvent && selectedEvent.title) || "",
+    start: (selectedEvent && selectedEvent.start) || date,
+    color: (selectedEvent && selectedEvent.color) || "",
   });
 
   const handleInput = (e) => {
@@ -37,30 +39,31 @@ export const Modal = ({
   };
 
   return (
-    <div className="modal" style={{ top: y, left: x }}>
+    <div className="modal" style={{ top: y + 50, left: x }}>
       <input
         type="text"
         value={state.title}
         name="title"
-        onChange={handleInput}
+        onChange={(e) =>
+          e.target.value.length <= 30 &&
+          setState({ ...state, title: e.target.value })
+        }
       />
-      <input
-        type="date"
-        value={state.date}
-        name="date"
-        onChange={handleInput}
+      <DatePicker
+        selected={state.start}
+        onChange={(date) => setState({ ...state, start: date })}
+        timeInputLabel="Time:"
+        dateFormat="MM/dd/yyyy h:mm aa"
+        showTimeInput
       />
-      <input
-        type="date"
-        value={state.time}
-        name="time"
-        onChange={handleInput}
-      />
-      <input
-        type="text"
-        value={state.notes}
-        name="notes"
-        onChange={handleInput}
+      <CirclePicker
+        width={"100%"}
+        circleSize={18}
+        circleSpacing={10}
+        color={state.color}
+        onChange={(color) =>
+          handleInput({ target: { name: "color", value: color.hex } })
+        }
       />
       <div className="buttons">
         <button className="red" onClick={created ? handleDiscard : close}>
