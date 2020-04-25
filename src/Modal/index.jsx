@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { CirclePicker } from "react-color";
 import DatePicker from "react-datepicker";
 
+import { useOuterClick } from "../hooks/useOuterClick";
+
 import { addEvent, updateEvent, deleteEvent } from "../Calendar/actions";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,11 +17,15 @@ export const Modal = ({
   selectedEvent,
   close,
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [state, setState] = useState({
     title: (selectedEvent && selectedEvent.title) || "",
     start: (selectedEvent && selectedEvent.start) || date,
     color: (selectedEvent && selectedEvent.color) || "",
+  });
+
+  const modalRef = useOuterClick((e) => {
+    close();
   });
 
   const handleInput = (e) => {
@@ -27,49 +33,72 @@ export const Modal = ({
   };
 
   const handleSubmit = () => {
-    dispatch(!created ? addEvent(state) : updateEvent(selectedEvent.id, state));
+    // dispatch(!created ? addEvent(state) : updateEvent(selectedEvent.id, state));
     setEvent(null);
     close();
   };
 
   const handleDiscard = () => {
-    dispatch(deleteEvent(selectedEvent.id));
+    // dispatch(deleteEvent(selectedEvent.id));
     setEvent(null);
     close();
   };
 
   return (
-    <div className="modal" style={{ top: y + 50, left: x }}>
-      <input
-        type="text"
-        value={state.title}
-        name="title"
-        onChange={(e) =>
-          e.target.value.length <= 30 &&
-          setState({ ...state, title: e.target.value })
-        }
-      />
-      <DatePicker
-        selected={state.start}
-        onChange={(date) => setState({ ...state, start: date })}
-        timeInputLabel="Time:"
-        dateFormat="MM/dd/yyyy h:mm aa"
-        showTimeInput
-      />
-      <CirclePicker
-        width={"100%"}
-        circleSize={18}
-        circleSpacing={10}
-        color={state.color}
-        onChange={(color) =>
-          handleInput({ target: { name: "color", value: color.hex } })
-        }
-      />
-      <div className="buttons">
-        <button className="red" onClick={created ? handleDiscard : close}>
-          {created ? "Discard" : "Cancel"}
-        </button>
-        <button onClick={handleSubmit}>{created ? "Edit" : "Save"}</button>
+    <div
+      ref={modalRef}
+      className="modal"
+      style={{ top: y + 113, left: x - 128 }}
+    >
+      <span class="top-bot"></span>
+      <button onClick={close} className="modal-close"></button>
+      <div className="modal-body">
+        <div>
+          <label className="modal-label" htmlFor="name">
+            event name
+          </label>
+          <input
+            id="name"
+            type="text"
+            className="modal-input"
+            value={state.title}
+            name="title"
+            onChange={(e) =>
+              e.target.value.length <= 30 &&
+              setState({ ...state, title: e.target.value })
+            }
+          />
+        </div>
+        <div>
+          <label className="modal-label" htmlFor="name">
+            event date and time
+          </label>
+          <DatePicker
+            className="modal-input time"
+            selected={state.start}
+            onChange={(date) => setState({ ...state, start: date })}
+            timeInputLabel="Time:"
+            dateFormat="MM/dd/yyyy h:mm aa"
+            showTimeInput
+          />
+        </div>
+        <CirclePicker
+          className="modal-color-picker"
+          width={"100%"}
+          circleSize={18}
+          circleSpacing={10}
+          color={state.color}
+          onChange={(color) =>
+            handleInput({ target: { name: "color", value: color.hex } })
+          }
+        />
+
+        <div className="buttons">
+          <button className="red" onClick={created ? handleDiscard : close}>
+            {created ? "Discard" : "Cancel"}
+          </button>
+          <button onClick={handleSubmit}>{created ? "Edit" : "Save"}</button>
+        </div>
       </div>
     </div>
   );

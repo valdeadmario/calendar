@@ -1,18 +1,30 @@
 .modal {
   position: absolute;
-  height: 400px;
+  height: 275px;
   width: 200px;
   background: #ffffff;
   border: 1px solid #43425d;
   top: 50px;
   border-radius: 10px;
+  padding: 25px;
 
   z-index: 100;
+}
+
+.modal-body {
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 80%;
 }
 
 .buttons {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
 
   padding: 26px;
 }
@@ -27,4 +39,77 @@
 
 .buttons .red {
   color: #ff5f5f;
+}
+
+.top-bot {
+  position: absolute;
+  top: -10px;
+  right: 115px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent; /* left arrow slant */
+  border-right: 6px solid transparent; /* right arrow slant */
+  border-bottom: 9px solid #43425d; /* bottom, add background color here */
+}
+
+.modal-close {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: none;
+  opacity: 0.9;
+  border: 2px solid #d6d6d6;
+}
+.modal-close:hover {
+  opacity: 1;
+}
+.modal-close:before,
+.modal-close:after {
+  position: absolute;
+  top: 3px;
+  left: 7px;
+  content: " ";
+  height: 10px;
+  width: 2px;
+  background-color: #d6d6d6;
+}
+.modal-close:before {
+  transform: rotate(45deg);
+}
+.modal-close:after {
+  transform: rotate(-45deg);
+}
+
+.modal-input {
+  border: none;
+  border-bottom: 0.3px solid #43425d80;
+
+  width: 100%;
+
+  color: #9c9c9c;
+}
+
+.modal-label {
+  font-size: 9px;
+  color: #d6d6d6;
+}
+
+.modal-color-picker {
+  margin-top: 30px;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.modal-input.time {
+  background-image: url(../img/calendar.svg);
+  display: inline-block;
+
+  background-repeat: no-repeat;
+  background-position: 180px 0;
+  vertical-align: middle;
 }

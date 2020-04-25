@@ -20,6 +20,7 @@ export const Calendar = ({ setPositions, setOpenModal, setEvent }) => {
   };
 
   const handleDateClick = (arg) => {
+    setOpenModal("");
     setPositions({
       x: arg.jsEvent.clientX,
       y: arg.jsEvent.clientY,
