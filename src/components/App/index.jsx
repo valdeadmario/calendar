@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { Calendar } from "../Calendar";
 import { Modal } from "../Modal";
 
-import rootReducer from "../reducers";
+import rootReducer from "../../reducers";
 
 const store = createStore(rootReducer);
 

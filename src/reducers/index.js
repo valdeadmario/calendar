@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import events from "../Calendar/reducer";
+import events from "../components/Calendar/reducer";
 
 export default combineReducers({
   events,
