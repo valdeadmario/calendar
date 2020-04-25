@@ -45,7 +45,7 @@ export const Calendar = ({ setPositions, setOpenModal, setEvent }) => {
           <h2>Calendar View</h2>
           <div className="calendar-calendar">
             <FullCalendar
-              eventLimit={4}
+              eventLimit={3}
               customButtons={{
                 agenda: {
                   theme: "true",
@@ -76,16 +76,10 @@ export const Calendar = ({ setPositions, setOpenModal, setEvent }) => {
               onDragStart={console.log}
               ref={calendarComponentRef}
               weekends={calendarWeekends}
+              displayEventTime={false}
               events={calendarEvents}
               dateClick={handleDateClick}
               eventClick={handleEventClick}
-              eventColor
-              eventContent={(arg) => (
-                <div>
-                  <b>111</b>&nbsp;
-                  <i>xi</i>
-                </div>
-              )}
             />
           </div>
         </div>
