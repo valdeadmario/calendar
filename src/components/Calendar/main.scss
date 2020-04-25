@@ -125,3 +125,26 @@
   padding: 7px;
   font-size: 13px;
 }
+
+.fc-minor td {
+  border: none;
+  border-top-style: none !important;
+}
+
+.fc-slats td {
+  padding: 20px;
+}
+
+.fc-now-indicator.fc-now-indicator-arrow,
+.fc-now-indicator.fc-now-indicator-line {
+  border-color: #3b86ff;
+}
+
+.fc-now-indicator.fc-now-indicator-arrow {
+  left: 65px !important;
+  border-width: 0 !important;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3b86ff;
+}

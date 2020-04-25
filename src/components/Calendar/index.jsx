@@ -81,6 +81,13 @@ export const Calendar = ({ setPositions, setOpenModal, setEvent }) => {
               events={calendarEvents}
               dateClick={handleDateClick}
               eventClick={handleEventClick}
+              nowIndicator={true}
+              slotDuration={"01:00:00"}
+              slotLabelFormat={{
+                hour: "numeric",
+                minute: "2-digit",
+                meridiem: "long",
+              }}
             />
           </div>
         </div>
