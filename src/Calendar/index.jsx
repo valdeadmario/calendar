@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateEvent } from "./actions";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -11,10 +12,14 @@ import { Modal } from "../Modal";
 import "./main.scss";
 
 export const Calendar = ({ setPositions }) => {
+  const dispatch = useDispatch();
   const calendarComponentRef = useRef();
   const [calendarWeekends, setCalendarWeekends] = useState(true);
   const calendarEvents = useSelector((state) => state.events);
-  console.log(calendarEvents);
+
+  const moveEvent = ({ event }) => {
+    dispatch(updateEvent(event.id, { start: event.start }));
+  };
 
   const handleDateClick = (arg) => {
     setPositions({ x: arg.jsEvent.clientX, y: arg.jsEvent.clientY });
@@ -53,6 +58,10 @@ export const Calendar = ({ setPositions }) => {
                 right: "dayGridMonth,timeGridWeek,timeGridDay,agenda",
               }}
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              editable={true}
+              droppable={true}
+              eventDrop={moveEvent}
+              onDragStart={console.log}
               ref={calendarComponentRef}
               weekends={calendarWeekends}
               events={calendarEvents}
