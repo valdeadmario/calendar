@@ -3,9 +3,13 @@ import { useDispatch } from "react-redux";
 import { CirclePicker } from "react-color";
 import DatePicker from "react-datepicker";
 
-import { useOuterClick } from "../../hooks/useOuterClick";
+import { useOuterClick } from "hooks/useOuterClick";
 
-import { addEvent, updateEvent, deleteEvent } from "../Calendar/actions";
+import {
+  addEvent,
+  updateEvent,
+  deleteEvent,
+} from "components/Calendar/actions";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./main.scss";

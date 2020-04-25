@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
-import { Calendar } from "../Calendar";
-import { Modal } from "../Modal";
+import { Calendar } from "components/Calendar";
+import { Modal } from "components/Modal";
 
-import rootReducer from "../../reducers";
+import rootReducer from "reducers";
 
 const store = createStore(rootReducer);
 
