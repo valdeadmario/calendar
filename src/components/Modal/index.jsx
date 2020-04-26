@@ -5,11 +5,7 @@ import DatePicker from "react-datepicker";
 
 import { useOuterClick } from "hooks/useOuterClick";
 
-import {
-  addEvent,
-  updateEvent,
-  deleteEvent,
-} from "components/Calendar/actions";
+import { addEvent, updateEvent, deleteEvent } from "actions/event.actions";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./main.scss";

@@ -1,6 +1,4 @@
-import React, { useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { updateEvent } from "./actions";
+import React, { useRef } from "react";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -9,35 +7,13 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 import "./main.scss";
 
-export const Calendar = ({ setPositions, setOpenModal, setEvent }) => {
-  const dispatch = useDispatch();
+export const Calendar = ({
+  handleDateClick,
+  handleEventClick,
+  handleDrop,
+  calendarEvents,
+}) => {
   const calendarComponentRef = useRef();
-  const [calendarWeekends, setCalendarWeekends] = useState(true);
-  const calendarEvents = useSelector((state) => state.events);
-  console.log(calendarEvents);
-  const moveEvent = ({ event }) => {
-    dispatch(updateEvent(event.id, { start: event.start }));
-  };
-
-  const handleDateClick = (arg) => {
-    console.log(arg);
-    setOpenModal("");
-    setPositions({
-      x: arg.jsEvent.pageX,
-      y: arg.jsEvent.pageY,
-      date: arg.date,
-    });
-    setOpenModal("save");
-  };
-
-  const handleEventClick = (arg) => {
-    const currentEvent = calendarEvents.find(
-      (item) => item.id === +arg.event.id
-    );
-    setPositions({ x: arg.jsEvent.clientX, y: arg.jsEvent.clientY });
-    setEvent(currentEvent);
-    setOpenModal("created");
-  };
 
   return (
     <div className="page-wrap">
@@ -74,10 +50,9 @@ export const Calendar = ({ setPositions, setOpenModal, setEvent }) => {
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               editable={true}
               droppable={true}
-              eventDrop={moveEvent}
-              onDragStart={console.log}
+              eventDrop={handleDrop}
               ref={calendarComponentRef}
-              weekends={calendarWeekends}
+              weekends={true}
               displayEventTime={false}
               events={calendarEvents}
               dateClick={handleDateClick}

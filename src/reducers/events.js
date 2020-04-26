@@ -1,4 +1,4 @@
-import { ADD_EVENT, UPDATE_EVENT, DELETE_EVENT } from "./actions";
+import { ADD_EVENT, UPDATE_EVENT, DELETE_EVENT } from "actions/event.actions";
 
 let ID = 100;
 

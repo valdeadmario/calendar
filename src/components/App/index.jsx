@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
-import { Calendar } from "components/Calendar";
+import { CalendarContainer } from "containers/CalendarContainer";
 import { Modal } from "components/Modal";
 
 import rootReducer from "reducers";
@@ -24,7 +24,7 @@ export const App = () => {
           setEvent={setEvent}
         />
       )}
-      <Calendar
+      <CalendarContainer
         setPositions={(arg) => {
           setPositions(arg);
         }}
