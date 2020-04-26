@@ -53,7 +53,7 @@ export const Calendar = ({ setPositions, setOpenModal, setEvent }) => {
                   theme: "true",
                   text: "Agenda",
                   click: function () {
-                    alert("clicked the custom button!");
+                    alert("clicked the agenda!");
                   },
                 },
               }}
