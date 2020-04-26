@@ -21,7 +21,7 @@ export const Modal = ({
   selectedEvent,
   close,
 }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [state, setState] = useState({
     title: (selectedEvent && selectedEvent.title) || "",
     start: (selectedEvent && selectedEvent.start) || date,
@@ -37,13 +37,13 @@ export const Modal = ({
   };
 
   const handleSubmit = () => {
-    // dispatch(!created ? addEvent(state) : updateEvent(selectedEvent.id, state));
+    dispatch(!created ? addEvent(state) : updateEvent(selectedEvent.id, state));
     setEvent(null);
     close();
   };
 
   const handleDiscard = () => {
-    // dispatch(deleteEvent(selectedEvent.id));
+    dispatch(deleteEvent(selectedEvent.id));
     setEvent(null);
     close();
   };
@@ -52,9 +52,9 @@ export const Modal = ({
     <div
       ref={modalRef}
       className="modal"
-      style={{ top: y + 113, left: x - 128 }}
+      style={{ top: y + 15, left: x - 128 }}
     >
-      <span class="top-bot"></span>
+      <span className="top-bot"></span>
       <button onClick={close} className="modal-close"></button>
       <div className="modal-body">
         <div>
