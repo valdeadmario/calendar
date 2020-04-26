@@ -14,7 +14,6 @@ export const CalendarContainer = ({ setPositions, setOpenModal, setEvent }) => {
   };
 
   const handleDateClick = (arg) => {
-    setOpenModal("");
     setPositions({
       x: arg.jsEvent.pageX,
       y: arg.jsEvent.pageY,
@@ -24,10 +23,11 @@ export const CalendarContainer = ({ setPositions, setOpenModal, setEvent }) => {
   };
 
   const handleEventClick = (arg) => {
+    arg.jsEvent.stopPropagation();
     const currentEvent = calendarEvents.find(
       (item) => item.id === +arg.event.id
     );
-    setPositions({ x: arg.jsEvent.clientX, y: arg.jsEvent.clientY });
+    setPositions({ x: arg.jsEvent.pageX, y: arg.jsEvent.pageY });
     setEvent(currentEvent);
     setOpenModal("created");
   };

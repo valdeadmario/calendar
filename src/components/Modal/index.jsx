@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { CirclePicker } from "react-color";
 import DatePicker from "react-datepicker";
@@ -13,7 +13,6 @@ import "./main.scss";
 export const Modal = ({
   positions: { x, y, date },
   created,
-  setEvent,
   selectedEvent,
   close,
 }) => {
@@ -23,6 +22,16 @@ export const Modal = ({
     start: (selectedEvent && selectedEvent.start) || date,
     color: (selectedEvent && selectedEvent.color) || "",
   });
+
+  useEffect(() => {
+    if (selectedEvent) {
+      setState({
+        title: (selectedEvent && selectedEvent.title) || "",
+        start: (selectedEvent && selectedEvent.start) || date,
+        color: (selectedEvent && selectedEvent.color) || "",
+      });
+    }
+  }, [selectedEvent]);
 
   const modalRef = useOuterClick((e) => {
     close();
@@ -34,13 +43,11 @@ export const Modal = ({
 
   const handleSubmit = () => {
     dispatch(!created ? addEvent(state) : updateEvent(selectedEvent.id, state));
-    setEvent(null);
     close();
   };
 
   const handleDiscard = () => {
     dispatch(deleteEvent(selectedEvent.id));
-    setEvent(null);
     close();
   };
 

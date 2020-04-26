@@ -16,7 +16,8 @@ export const useOuterClick = (callback) => {
       if (
         innerRef.current &&
         callbackRef.current &&
-        !innerRef.current.contains(e.target)
+        !innerRef.current.contains(e.target) &&
+        !~e.target.className.indexOf("react-datepicker")
       ) {
         callbackRef.current(e);
       }
@@ -24,4 +25,4 @@ export const useOuterClick = (callback) => {
   }, []);
 
   return innerRef;
-}
+};

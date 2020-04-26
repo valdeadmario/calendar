@@ -17,17 +17,17 @@ export const App = () => {
     <Provider store={store}>
       {showModal && (
         <Modal
-          close={() => setShowModal("")}
+          close={() => {
+            setEvent(null);
+            setShowModal("");
+          }}
           positions={positions}
           created={showModal === "created"}
           selectedEvent={selectedEvent}
-          setEvent={setEvent}
         />
       )}
       <CalendarContainer
-        setPositions={(arg) => {
-          setPositions(arg);
-        }}
+        setPositions={setPositions}
         setOpenModal={setShowModal}
         setEvent={setEvent}
       />
