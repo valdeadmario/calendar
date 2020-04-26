@@ -26,7 +26,7 @@ const events = (state = initialState, action) => {
 
     case UPDATE_EVENT:
       return state.map((event) =>
-        event.id === action.payload.id
+        event.id === +action.payload.id
           ? { ...event, ...action.payload.body }
           : event
       );
