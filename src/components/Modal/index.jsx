@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { CirclePicker } from "react-color";
 import DatePicker from "react-datepicker";
 
 import { useOuterClick } from "hooks/useOuterClick";
-
-import { addEvent, updateEvent, deleteEvent } from "actions/event.actions";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./main.scss";
@@ -15,8 +12,9 @@ export const Modal = ({
   created,
   selectedEvent,
   close,
+  handleDiscard,
+  handleSubmit,
 }) => {
-  const dispatch = useDispatch();
   const [state, setState] = useState({
     title: (selectedEvent && selectedEvent.title) || "",
     start: (selectedEvent && selectedEvent.start) || date,
@@ -31,25 +29,11 @@ export const Modal = ({
         color: (selectedEvent && selectedEvent.color) || "",
       });
     }
-  }, [selectedEvent]);
+  }, [selectedEvent, date]);
 
   const modalRef = useOuterClick((e) => {
     close();
   });
-
-  const handleInput = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = () => {
-    dispatch(!created ? addEvent(state) : updateEvent(selectedEvent.id, state));
-    close();
-  };
-
-  const handleDiscard = () => {
-    dispatch(deleteEvent(selectedEvent.id));
-    close();
-  };
 
   return (
     <div
@@ -95,16 +79,16 @@ export const Modal = ({
           circleSize={18}
           circleSpacing={10}
           color={state.color}
-          onChange={(color) =>
-            handleInput({ target: { name: "color", value: color.hex } })
-          }
+          onChange={(color) => setState({ ...state, color: color.hex })}
         />
 
         <div className="buttons">
           <button className="red" onClick={created ? handleDiscard : close}>
             {created ? "Discard" : "Cancel"}
           </button>
-          <button onClick={handleSubmit}>{created ? "Edit" : "Save"}</button>
+          <button onClick={() => handleSubmit(state)}>
+            {created ? "Edit" : "Save"}
+          </button>
         </div>
       </div>
     </div>

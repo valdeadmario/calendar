@@ -3,7 +3,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 
 import { CalendarContainer } from "containers/CalendarContainer";
-import { Modal } from "components/Modal";
+import { ModalContainer } from "containers/ModalContainer";
 
 import rootReducer from "reducers";
 
@@ -16,7 +16,7 @@ export const App = () => {
   return (
     <Provider store={store}>
       {showModal && (
-        <Modal
+        <ModalContainer
           close={() => {
             setEvent(null);
             setShowModal("");
